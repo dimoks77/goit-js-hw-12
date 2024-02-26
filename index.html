@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vanilla-app-template/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>11 - Serach form and images</title>
-    
-    <script type="module" crossorigin src="/vanilla-app-template/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/vanilla-app-template/assets/vendor-527658dd.js">
-    <link rel="stylesheet" href="/vanilla-app-template/assets/vendor-cf6910df.css">
-    <link rel="stylesheet" href="/vanilla-app-template/assets/index-f4e38c33.css">
-  </head>
-  <body>
-    
-    <div class="container">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vanilla-app-template/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12</title>
+  
+  
+  <script type="module" crossorigin src="/vanilla-app-template/commonHelpers.js"></script>
+  <link rel="modulepreload" crossorigin href="/vanilla-app-template/assets/vendor-5401a4b0.js">
+  <link rel="stylesheet" href="/vanilla-app-template/assets/vendor-cf6910df.css">
+  <link rel="stylesheet" href="/vanilla-app-template/assets/index-3b5e199b.css">
+</head>
 
-      <form class="form" id="form" name="form">
-        <input type="text" class="input" placeholder="Search images..." name="input" id="search" required />
-        <button type="submit" class="btn">Search</button>
+<body>
+  <div class="container">
+  <div class="header">
+    <form class="form-inline search-form js-search-form">
+      <div class="form-group">
+        <input type="text" class="form-control" name="query" />
+        <!-- <input type="text" class="form-control" value="Ukraine" name="query" /> -->
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
 
-      </form>
+  <ul class="js-article-list news-list gallery"></ul>
 
-      <span class="loader"></span>
+  <div>
+    <button type="button" class="btn js-btn-load hidden" data-action="load-more">
+      <span>Load more...</span>
+      <span class="js-loader spinner-border spinner-border-sm spinner hidden" role="status" aria-hidden="true"></span>
+    </button>
+  </div>
+</div>
+  
+</body>
 
-      <ul class="gallery"></ul>
-
-      <button class="loadmore hidden" id="loadmore">Load more</button>      
-      
-    </div>
-
-    
-  </body>
 </html>

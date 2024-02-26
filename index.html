@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vanilla-app-template/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11 - Serach form and images</title>
+    
+    <script type="module" crossorigin src="/vanilla-app-template/commonHelpers.js"></script>
+    <link rel="modulepreload" crossorigin href="/vanilla-app-template/assets/vendor-527658dd.js">
+    <link rel="stylesheet" href="/vanilla-app-template/assets/vendor-cf6910df.css">
+    <link rel="stylesheet" href="/vanilla-app-template/assets/index-f4e38c33.css">
+  </head>
+  <body>
+    
+    <div class="container">
+
+      <form class="form" id="form" name="form">
+        <input type="text" class="input" placeholder="Search images..." name="input" id="search" required />
+        <button type="submit" class="btn">Search</button>
+
+      </form>
+
+      <span class="loader"></span>
+
+      <ul class="gallery"></ul>
+
+      <button class="loadmore hidden" id="loadmore">Load more</button>      
+      
+    </div>
+
+    
+  </body>
+</html>

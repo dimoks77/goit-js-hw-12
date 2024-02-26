@@ -4,8 +4,8 @@ import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-import { fetchArticles } from './js/pixabay-api.js';
-import { articlesTemplate } from './js/render-functions.js';
+import { fetchPhotos } from './js/pixabay-api.js';
+import { photosTemplate } from './js/render-functions.js';
 
 // SimpleLightbox params
 const options = {
@@ -22,15 +22,15 @@ const options = {
 
 const refs = {
   formElem: document.querySelector('.js-search-form'),
-  articleListElem: document.querySelector('.js-article-list'),
+  photoListElem: document.querySelector('.js-article-list'),
   btnLoadMore: document.querySelector('.js-btn-load'),
   loadElem: document.querySelector('.js-loader'),
 };
 
-
 let query;
 let page;
 let maxPage;
+
 refs.formElem.addEventListener('submit', onFormSubmit);
 refs.btnLoadMore.addEventListener('click', onLoadMoreClick);
 
@@ -44,13 +44,13 @@ async function onFormSubmit(e) {
   }
   showLoader();
   try {
-    const data = await fetchArticles(query, page);
-    if (data.totalResults === 0) {
-      showError('Sorry!');
+    const data = await fetchPhotos(query, page);
+    if (data.totalHits === 0) {
+      showError('Нічого не знайдено!');
     }
-    maxPage = Math.ceil(data.totalResults / 15);
-    refs.articleListElem.innerHTML = '';
-    renderArticles(data.hits);
+    maxPage = Math.ceil(data.totalHits / 15);
+    refs.photoListElem.innerHTML = '';
+    renderPhotos(data.hits);
   } catch (err) {
     showError(err);
   }
@@ -63,20 +63,19 @@ async function onFormSubmit(e) {
 async function onLoadMoreClick() {
   page += 1;
   showLoader();
-  const data = await fetchArticles(query, page);
-  renderArticles(data.hits);
+  const data = await fetchPhotos(query, page);
+  renderPhotos(data.hits);
   hideLoader();
   checkBtnVisibleStatus();
-  const height =
-    refs.articleListElem.firstElementChild.getBoundingClientRect().height;
+  const height = refs.photoListElem.firstElementChild.getBoundingClientRect().height;
   scrollBy({
     behavior: 'smooth',
     top: 10,
   });
 }
-function renderArticles(articles) {
-  const markup = articlesTemplate(articles);
-  refs.articleListElem.insertAdjacentHTML('beforeend', markup);
+function renderPhotos(photos) {
+  const markup = photosTemplate(photos);
+  refs.photoListElem.insertAdjacentHTML('beforeend', markup);
 
   const lightbox = new SimpleLightbox('.gallery a', options);
   lightbox.refresh();
@@ -94,12 +93,14 @@ function showLoader() {
 function hideLoader() {
   refs.loadElem.classList.add('hidden');
 }
+
 function showError(msg) {
   iziToast.error({
     title: 'Error',
     message: msg,
   });
 }
+
 function checkBtnVisibleStatus() {
   if (page >= maxPage) {
     hideLoadBtn();

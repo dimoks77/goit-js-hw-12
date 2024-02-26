@@ -55,7 +55,8 @@ img {
 	max-width: 1400px;
 	margin: 0 auto;
 	display: flex;
-	flex-direction: column
+	flex-direction: column;
+	align-items: center;
 }
 
 .form {
@@ -91,7 +92,7 @@ input:active {
 	border: 1px solid #4E75FF;
 }
 
-button {
+.btn {
 	font-family: Montserrat;
 	font-size: 16px;
 	font-weight: 500;
@@ -107,7 +108,7 @@ button {
   height: 43px;
 }
 
-button:hover {
+.btn:hover {
 	background: #6c8cff
 }
 
@@ -118,19 +119,20 @@ button:hover {
 .gallery {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 24px;
+	gap: 12px;
 	justify-content: center;
-  margin-bottom: 40px;
+  	margin-bottom: 40px;
 }
 
 .gallery-item {
 	list-style: none;
-  width: 360px;
+  width: 250px;
   height: 200px;
+	border-radius: 2px;
 }
 
 .gallery-image {
-	width: 360px;
+	width: 250px;
 	height: 150px;
 	margin-bottom: 2px;
 	display: block
@@ -213,7 +215,7 @@ span {
 
 
 .hidden {
-	display: none
+	display: none;
 }
 
 .desc {
@@ -248,4 +250,22 @@ span {
   font-weight: 400;
   line-height: 24px; /* 200% */
   letter-spacing: 0.48px;
+}
+
+.loadmore {
+	width: 150px;
+	font-family: Montserrat;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.5;
+	letter-spacing: .04em;
+	padding: 8px 16px;
+	border-radius: 4px;
+	border: 1px solid black;
+	background-color: white;
+	color: black;
+	cursor: pointer;
+  	height: 40px;
+	align-items: center;
+	/* display: inline-block; */
 }

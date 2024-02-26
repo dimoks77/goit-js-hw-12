@@ -3,6 +3,8 @@ import SimpleLightbox from 'simplelightbox';
 import 'izitoast/dist/css/iziToast.min.css';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+
+
 export function handleResponse(data, gallery) {
   if (data.hits.length === 0) {
     iziToast.error({

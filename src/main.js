@@ -50,7 +50,8 @@ async function onFormSubmit(e) {
       showError('Нічого не знайдено!');
     }
     maxPage = Math.ceil(data.totalHits / 15);
-    
+    // console.log("data.totalHits:", data.totalHits);
+
     refs.photoListElem.innerHTML = '';
     renderPhotos(data.hits);
     lightbox.refresh(); 
@@ -66,6 +67,9 @@ async function onFormSubmit(e) {
 
 async function onLoadMoreClick() {
   page += 1;
+  // console.log("page:", page);
+  // console.log("max-page:", maxPage);
+
   showLoader();
   const data = await fetchPhotos(query, page);
   renderPhotos(data.hits);
@@ -104,7 +108,7 @@ function showError(msg) {
 }
 
 function checkBtnVisibleStatus() {
-  if (page >= maxPage || (page === maxPage - 1 && totalHits % perPage === 0)) {
+  if ((page >= maxPage)) {
 
     hideLoadBtn();
     if (page > 1) { showError("We're sorry, but you've reached the end of search results."); }

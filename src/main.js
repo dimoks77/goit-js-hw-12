@@ -22,7 +22,7 @@ const options = {
 
 const refs = {
   formElem: document.querySelector('.js-search-form'),
-  photoListElem: document.querySelector('.js-article-list'),
+  photoListElem: document.querySelector('.js-photo-list'),
   btnLoadMore: document.querySelector('.js-btn-load'),
   loadElem: document.querySelector('.js-loader'),
 };

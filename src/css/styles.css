@@ -37,6 +37,10 @@ img {
 	height: auto
 }
 
+body {
+	padding-bottom: 40px;
+}
+
 :root {
 	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
 	font-size: 16px;

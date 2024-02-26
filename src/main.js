@@ -19,6 +19,7 @@ const options = {
   scaleImageToRatio: true,
 };
 
+const lightbox = new SimpleLightbox('.gallery a', options);
 
 const refs = {
   formElem: document.querySelector('.js-search-form'),
@@ -49,8 +50,11 @@ async function onFormSubmit(e) {
       showError('Нічого не знайдено!');
     }
     maxPage = Math.ceil(data.totalHits / 15);
+    
     refs.photoListElem.innerHTML = '';
     renderPhotos(data.hits);
+    lightbox.refresh(); 
+
   } catch (err) {
     showError(err);
   }
@@ -65,6 +69,7 @@ async function onLoadMoreClick() {
   showLoader();
   const data = await fetchPhotos(query, page);
   renderPhotos(data.hits);
+  lightbox.refresh();
   hideLoader();
   checkBtnVisibleStatus();
   const height = refs.photoListElem.firstElementChild.getBoundingClientRect().height;
@@ -76,9 +81,6 @@ async function onLoadMoreClick() {
 function renderPhotos(photos) {
   const markup = photosTemplate(photos);
   refs.photoListElem.insertAdjacentHTML('beforeend', markup);
-
-  const lightbox = new SimpleLightbox('.gallery a', options);
-  lightbox.refresh();
 
 }
 function showLoadBtn() {
@@ -102,8 +104,10 @@ function showError(msg) {
 }
 
 function checkBtnVisibleStatus() {
-  if (page >= maxPage) {
+  if (page >= maxPage || (page === maxPage - 1 && totalHits % perPage === 0)) {
+
     hideLoadBtn();
+    if (page > 1) { showError("We're sorry, but you've reached the end of search results."); }
   } else {
     showLoadBtn();
   }

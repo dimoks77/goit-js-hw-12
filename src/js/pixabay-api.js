@@ -1,4 +1,5 @@
 import axios from 'axios';
+export let per_page = 15;
 
 export async function fetchPhotos(query, currentPage) {
   const API_KEY = '42557363-2349d8dc8525cd1cea516a01b';
@@ -9,7 +10,7 @@ export async function fetchPhotos(query, currentPage) {
     key: API_KEY,
     q: query,
     orientation: 'horizontal',
-    per_page: 15,
+    per_page: per_page,
     page: currentPage,
     safesearch: true,
   };

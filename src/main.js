@@ -6,6 +6,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { fetchPhotos } from './js/pixabay-api.js';
 import { photosTemplate } from './js/render-functions.js';
+import { per_page } from './js/pixabay-api.js';
 
 // SimpleLightbox params
 const options = {
@@ -49,8 +50,8 @@ async function onFormSubmit(e) {
     if (data.totalHits === 0) {
       showError('Нічого не знайдено!');
     }
-    maxPage = Math.ceil(data.totalHits / 15);
-    // console.log("data.totalHits:", data.totalHits);
+    maxPage = Math.ceil(data.totalHits / per_page);
+    console.log("data.totalHits:", data.totalHits);
 
     refs.photoListElem.innerHTML = '';
     renderPhotos(data.hits);
@@ -67,19 +68,18 @@ async function onFormSubmit(e) {
 
 async function onLoadMoreClick() {
   page += 1;
-  // console.log("page:", page);
-  // console.log("max-page:", maxPage);
-
+  // console.log(page, "/", maxPage);
+  
   showLoader();
   const data = await fetchPhotos(query, page);
   renderPhotos(data.hits);
   lightbox.refresh();
   hideLoader();
   checkBtnVisibleStatus();
-  const height = refs.photoListElem.firstElementChild.getBoundingClientRect().height;
+  const height = refs.photoListElem.firstElementChild.getBoundingClientRect().height; // высота
   scrollBy({
     behavior: 'smooth',
-    top: 10,
+    top: (height*3.5), // прокрутка на 3,5 высоты
   });
 }
 function renderPhotos(photos) {
